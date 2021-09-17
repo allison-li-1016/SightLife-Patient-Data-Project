@@ -1,12 +1,13 @@
 #importing libraries
 library(tidyverse)
-library(lintr)
-library(styler)
 library(ggplot2)
-library(mapproj)
-library(rgeos)
-library(maptools)
-library(ggmap)
+#library(rgeos)
+#library(maptools)
+#library(ggmap)
+library(sp)
+library(raster)
+library(plyr)
+library(rgdal)
 
 #import data 
 location_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
@@ -38,3 +39,7 @@ states <- na_if(states,0)
 states <- na.omit(states)
 num_states = table(states) 
 View(num_states)
+
+#build state shapes for Indian states
+India <- getData('GADM', country='IN', level=1)
+
