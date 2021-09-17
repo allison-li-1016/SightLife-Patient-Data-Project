@@ -1,4 +1,6 @@
 #importing libraries
+library(plyr)
+library(dplyr)
 library(tidyverse)
 library(ggplot2)
 #library(rgeos)
@@ -6,8 +8,8 @@ library(ggplot2)
 #library(ggmap)
 library(sp)
 library(raster)
-library(plyr)
 library(rgdal)
+library(mapproj)
 
 #import data 
 location_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
@@ -17,8 +19,8 @@ View(location_data)
 #build map chart based on countries - India vs. Bangladesh 
 countries <- location_data['GEN_COUNTRY']
 num_countries = unique(countries)
-View(countries)
-View(num_countries)
+#View(countries)
+#View(num_countries)
 
 #create blank theme for map plots
 blank_theme <- theme_bw() +
@@ -37,9 +39,23 @@ blank_theme <- theme_bw() +
 states <- location_data['GEN_STATE'] 
 states <- na_if(states,0)
 states <- na.omit(states)
-num_states = table(states) 
-View(num_states)
+num_states = as_tibble(table(states))
+names(num_states)[names(num_states) == "states"] <- "NAME_1"
 
 #build state shapes for Indian states
 India <- getData('GADM', country='IN', level=1)
+India_UTM<-spTransform(India, CRS("+init=EPSG:24383"))
+India_UTM@data$NAME_1
+India_UTM@data$id <- rownames(India_UTM@data)
+India_UTM@data <- join(India_UTM@data, num_states, by="NAME_1")
+India_df <- fortify(India_UTM)
+India_df <- join(India_df,India_UTM@data, by="id")
 
+#map graph aesthetics
+map_plot <- ggplot() + 
+  geom_polygon(data = India_df, aes(x = long, y = lat, group = group, fill = n), color = "black", size = 0.1)  +
+  #coord_map() +
+  scale_fill_continuous(low = "#D5D1E9", high = "#645D9B") +
+  labs(title = "Patients by State in India", x = "", y = "", fill = "Number of Patients") +
+  blank_theme
+#plot(map_plot)
