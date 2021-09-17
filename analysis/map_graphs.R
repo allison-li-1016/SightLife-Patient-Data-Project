@@ -3,9 +3,6 @@ library(plyr)
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
-#library(rgeos)
-#library(maptools)
-#library(ggmap)
 library(sp)
 library(raster)
 library(rgdal)
@@ -14,13 +11,10 @@ library(mapproj)
 #import data 
 location_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
 
-View(location_data)
-
 #build map chart based on countries - India vs. Bangladesh 
 countries <- location_data['GEN_COUNTRY']
 num_countries = unique(countries)
-#View(countries)
-#View(num_countries)
+
 
 #create blank theme for map plots
 blank_theme <- theme_bw() +
@@ -54,8 +48,6 @@ India_df <- join(India_df,India_UTM@data, by="id")
 #map graph aesthetics
 map_plot <- ggplot() + 
   geom_polygon(data = India_df, aes(x = long, y = lat, group = group, fill = n), color = "black", size = 0.1)  +
-  #coord_map() +
   scale_fill_continuous(low = "#D5D1E9", high = "#645D9B") +
   labs(title = "Patients by State in India", x = "", y = "", fill = "Number of Patients") +
   blank_theme
-#plot(map_plot)
