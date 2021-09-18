@@ -32,7 +32,7 @@ gender <- c("Female", "Female", "Female", "Male", "Male", "Male")
 visitation_period <- c("1 Month", "3 Months", "Year 1", "1 Month", "3 Months", "Year 1")
 visitation_prop <- c(female_m1_prop, female_m3_prop, female_y1_prop, male_m1_prop, male_m3_prop, male_y1_prop)
 gender_prop_data <- data.frame(gender,visitation_period, visitation_prop)
-#Filter by gender -> filter gender_prop_data by gender
+#Filter by time period -> filter gender_prop_data by M1, M3, Y1
 
 #create graph from new table 
 gender_plot <- ggplot(data =gender_prop_data) +
