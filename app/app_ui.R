@@ -110,7 +110,7 @@ page_three <- tabPanel(
       m1_age_input 
     ),
     mainPanel(
-      plotlyOutput(outputId = "##TBD"),
+      plotlyOutput(outputId = "output$scatter_M1"),
     )
   ),
   br(),
@@ -119,7 +119,7 @@ page_three <- tabPanel(
       m3_age_input 
     ),
     mainPanel(
-      plotlyOutput(outputId = "##TBD"),
+      plotlyOutput(outputId = "output$scatter_M3"),
     )
   ),
   sidebarLayout(
@@ -127,7 +127,7 @@ page_three <- tabPanel(
       y1_age_input 
     ),
     mainPanel(
-      plotlyOutput(outputId = "##TBD"),
+      plotlyOutput(outputId = "output$scatter_Y1"),
     )
   ),
   br(),
@@ -137,7 +137,7 @@ page_three <- tabPanel(
       month_input
     ),
     mainPanel(
-      plotlyOutput(outputId = "##TBD"),
+      plotlyOutput(outputId = "line"),
     )
   ),
   br(),
@@ -155,7 +155,7 @@ page_four <- tabPanel(
       diagnosis_age_input
     ),
     mainPanel(
-      plotlyOutput(outputId = "##TBD"),
+      plotlyOutput(outputId = "pie"),
     )
   ),
   br(),
