@@ -10,7 +10,8 @@ source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\age
 #Filter by time period (gender vs. patient drop-off rate)
 time_period_input <- selectInput(
   inputId = "time_period_choice",
-  choices = visitation_period,
+  choices = sort(unique(visitation_period)),
+  selected = sort(unique(visitation_period))[1],
   label  = "Choose a time period"
 )
 
@@ -84,7 +85,9 @@ page_two <- tabPanel(
   "Location Analysis", 
   titlePanel("Observing Distribution of Patients by Location"),
   br(),
-    map_plot,
+  mainPanel(
+    plotlyOutput(outputId = "map"),
+  ),
   br(),
   #Why included chart and what patterns shown 
   p("put the actual analysis info here.")
@@ -150,14 +153,7 @@ page_four <- tabPanel(
   "Diagnosis Analysis", 
   titlePanel("Observing Diagnosis Proportions by Age"),
   br(),
-  sidebarLayout(
-    sidebarPanel(
-      diagnosis_age_input
-    ),
-    mainPanel(
-      plotlyOutput(outputId = "pie"),
-    )
-  ),
+  plotlyOutput(outputId = "pie"),
   br(),
   #Why included chart and what patterns shown 
   p("diagnosis summary.")

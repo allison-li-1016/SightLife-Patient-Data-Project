@@ -6,14 +6,24 @@ library(plotly)
 source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\gender_return_visit_graphs.R")
 source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\age_return_visit_graphs.R")
 source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\surgery_comp_revisitation_graphs.R")
-
-
-
-
+source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\map_graphs.R")
+source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\diagnosis_graphs.R")
 
 #Display outputs
-server <- function(input, output){
-  #Gender/DropOff Analysis/Graph
+server <- function(input, output, session){
+  #Location Data
+  output$map <- renderPlotly({
+    #visualizing plot
+    map_plot <- ggplot() + 
+      geom_polygon(data = India_df, aes(x = long, y = lat, group = group, fill = n), color = "black", size = 0.1)  +
+      scale_fill_continuous(low = "#D5D1E9", high = "#645D9B") +
+      labs(title = "Patients by State in India", x = "", y = "", fill = "Number of Patients") +
+      blank_theme
+    #doing the plot
+    ggplotly(map_plot) 
+  })
+  
+   #Gender/DropOff Analysis/Graph
   output$barchart_gen <- renderPlotly({
     #filter by time input
     gender_plot_data <- gender_prop_data %>% 
@@ -95,29 +105,13 @@ server <- function(input, output){
   
   #Diagnosis Distribution Graph
   output$pie <- renderPlotly({
-    #filter by age input
-    final_patient_data <- reactive({
-        filtered_patients<- patient_data%>% 
-          group_by(GEN_AGE) %>% 
-          filter(GEN_AGE <= input$diagnosis_age_choice[2],GEN_AGE >= input$diagnosis_age_choice[1])
-    })
-    diagnosis_count <- table(final_patient_data$GEN_INDICATION_OF_PK) 
-    diagnosis_count <- data.frame(diagnosis_count)
-    colnames(diagnosis_count) <- c("condition", "patients")
-    diagnosis_count <- diagnosis_count[-1,]
-    total <- sum(diagnosis_count$patients)
-    diagnosis_count$prop <- with(diagnosis_count, patients/total)
-    diagnosis_count$ymax = cumsum(diagnosis_count$prop)
-    diagnosis_count$ymin = c(0, head(diagnosis_count$ymax, n=-1))
-    #visualizing plot
-    diagnosis_donut <- ggplot(diagnosis_count, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=condition)) +
-      geom_rect() +
-      coord_polar(theta="y") + 
-      scale_fill_brewer(palette=3) +
-      scale_color_brewer(palette=3) +
-      xlim(c(2, 4)) +
-      theme_void()
-    #doing the plot
+    #visualize plot
+    diagnosis_donut <- ggplot(data =diagnosis_count) +
+      geom_col(mapping = aes(x = condition, y = prop, fill = condition)) +
+      scale_fill_manual("Diagnosis Names", values = c("Active microbial keratitis" = "#645D9B", "Corneal edema" = "#9991C6", "Corneal scar" = "#D5D1E9", "Dystrophy" = "#499996", "Ectatic disorder" = "#82D8D5", "Failed graft " = "#f2c380", "Others  specify the diagnosis" = "#BF6059")) +
+      labs(x = "Condition", y = "Proportion of Patient Conditions", title = "Diagnosis Proportions") +
+      theme(axis.text.x=element_blank(),
+            axis.ticks.x=element_blank())
     ggplotly(diagnosis_donut) 
   })
 }
