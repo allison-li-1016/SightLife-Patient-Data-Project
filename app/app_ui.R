@@ -66,11 +66,15 @@ diagnosis_age_input  <- sliderInput(
 page_one <- tabPanel(
   "Introduction", 
   #put in sightlife images
-  tags$img(alt="Covid-19", src="COVID-19.png"),
+  tags$img(alt="Cover", src="coverPhoto.png"),
   tags$h1("Project Overview and Introduction"),
-  p("copy/paste summary here"),
+  p("This database holds extensive clinical data from patients who've received corneal transplant surgeries from hospitals in the developing areas of Bhubaneswar and Vizag in India. While corneal transplant surgery remains an effective choice for patients with advanced corneal disease, the long-term prognosis of these allografts is especially diminished for developing countries. Since the patient records are collected from tertiary hospitals, this data will provide a good indication of the level of patient burden within developing areas such as these secondary cities in India."),
+  br(),
+  p("This data set contains corneal transplant clinical records from 1513 patients at the LV Prasad Eye Institute of Bhubaneswar and Vizag in India. The LVPEI Institute in Bhubaneswar and Vizag are both tertiary level hospitals for eye and cornea health in their respective cities. These patient records hold a collective of 7-10 years of data, mostly from local patients within a 200-kilometer radius from the hospital."),
+  br(),
+  p("The goal of this database is to identify trends that point to barriers of access or poor clinical results, in hopes of bettering post-transplant regiments to optimize patient outcomes for corneal transplants. This database will be utilized to enrich post-transplant research, create better post-transplant protocols for all clinical settings, and to build a clinical algorithm that predicts 1-year post-transplant outcomes."),
   #put in sightlife and LVPEI logo image
-  tags$img(alt="Covid-19", src="COVID-19.png")
+  tags$img(alt="Logo", src="logos.png")
 )
 
 #page 2 - map of India/patient locations
@@ -83,7 +87,7 @@ page_two <- tabPanel(
   ),
   br(),
   #Why included chart and what patterns shown 
-  p("put the actual analysis info here.")
+  p("Out of the 1513 patients included in this dataset, 1 patient's home was in Bangladesh while the other 1512 all lived in India. All of the patients were within a 200 KM distance of a LVPEI Institute in either Bhubaneswar or Vizag. 1430 of the 1513 patients came from the state of Odisha, making it the most common home state of the patients in this sample.")
 )
 
 #page 3 - patient drop-off rates by age, gender, surgery complications
@@ -106,7 +110,7 @@ page_three <- tabPanel(
       m1_age_input 
     ),
     mainPanel(
-      plotlyOutput(outputId = "output$scatter_M1"),
+      plotlyOutput(outputId = "scatter_M1"),
     )
   ),
   br(),
@@ -115,7 +119,7 @@ page_three <- tabPanel(
       m3_age_input 
     ),
     mainPanel(
-      plotlyOutput(outputId = "output$scatter_M3"),
+      plotlyOutput(outputId = "scatter_M3"),
     )
   ),
   sidebarLayout(
@@ -123,7 +127,7 @@ page_three <- tabPanel(
       y1_age_input 
     ),
     mainPanel(
-      plotlyOutput(outputId = "output$scatter_Y1"),
+      plotlyOutput(outputId = "scatter_Y1"),
     )
   ),
   br(),
@@ -131,7 +135,7 @@ page_three <- tabPanel(
   plotlyOutput(outputId = "line"),
   br(),
   #Why included chart and what patterns shown 
-  p("summary of info ")
+  p("Above are observations of successful return visits at 1, 3, and 12 months correlated to gender, age, and the presence of surgery complications. As a summary, according to the data women patients had a higher return visit rate at 12 months in comparison to men, while men had a higher return visit rate at 1 and 3 months. In general, there were little to no correlation between age and return visit rate. While return visit rate decreased over time, surgery complications also slightly decreased, though the rate remained around the same over time.")
 )
 
 #page 4 - diagnosis analysis
@@ -142,7 +146,7 @@ page_four <- tabPanel(
   plotlyOutput(outputId = "pie"),
   br(),
   #Why included chart and what patterns shown 
-  p("diagnosis summary.")
+  p("Above is a graph of the proportion of reported conditions from all the patients in the database. Since the highest reported condition was listed under 'Other' (46%), most of the patients had more specific and unique conditions that were not of the listed set. The highest reported condition of the listed set was Active Microbial Keratitis (24%) with Corneal Scar following in second (15%).")
 )
 
 ui <- navbarPage(

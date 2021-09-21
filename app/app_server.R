@@ -31,7 +31,7 @@ server <- function(input, output, session){
     #visualizing plot
     gender_plot <- ggplot(data =gender_plot_data) +
       geom_col(mapping = aes(x = visitation_period, y = visitation_prop, fill = gender)) +
-      scale_fill_manual('Product', values=c("#645D9B","#D5D1E9")) +
+      scale_fill_manual('Gender', values=c("#645D9B","#D5D1E9")) +
       labs(x = "Time after first visit", y = "Proportion of return visits", title = "Return visits by gender")
     #doing the plot
     ggplotly(gender_plot) 
@@ -61,13 +61,13 @@ server <- function(input, output, session){
     })
     #visualizing plot
     age_plot_m3 <- ggplot(m3_plot_data()) +
-      geom_point(mapping = aes(x = unique_ages, y = m1_values), color ="#645D9B") +
+      geom_point(mapping = aes(x = unique_ages, y = m3_values), color ="#645D9B") +
       labs(x = "Ages", y = "Proportion Return Visits at Month 3", title = "Age vs. Return Visit Month 3")
     #doing the plot
     ggplotly(age_plot_m3) 
   })
   
-  #Y1 Age/Return Visit Graph 
+  #Y3 Age/Return Visit Graph 
   output$scatter_Y1 <- renderPlotly({
     #filter by age input
     y1_plot_data <- reactive({
@@ -76,7 +76,7 @@ server <- function(input, output, session){
     })
     #visualizing plot
     age_plot_y1 <- ggplot(y1_plot_data()) +
-      geom_point(mapping = aes_string(x = unique_ages, y = y1_values), color ="#645D9B") +
+      geom_point(mapping = aes(x = unique_ages, y = y1_values), color ="#645D9B") +
       labs(x = "Ages", y = "Proportion Return Visits at Year 1", title = "Age vs. Return Visit Year 1")
     #doing the plot
     ggplotly(age_plot_y1) 
