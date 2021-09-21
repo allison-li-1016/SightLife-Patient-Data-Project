@@ -15,13 +15,6 @@ time_period_input <- selectInput(
   label  = "Choose a time period"
 )
 
-#Filter by time period (comp vs. revisitation)
-month_input <- selectInput(
-  inputId = "months_choice",
-  choices = months,
-  label  = "Choose a time period"
-)
-
 #Filter by age m1_age_graph
 m1_age_input  <- sliderInput(
   inputId = "m1_age_choice", 
@@ -29,7 +22,7 @@ m1_age_input  <- sliderInput(
   min = min(unique_ages),
   max = max(unique_ages),
   value = c(18, 45), 
-  step = 30,
+  step = 1,
   animate = animationOptions(interval = 300, loop = TRUE)
 )
 
@@ -40,7 +33,7 @@ m3_age_input  <- sliderInput(
   min = min(unique_ages),
   max = max(unique_ages),
   value = c(18, 45), 
-  step = 30,
+  step = 1,
   animate = animationOptions(interval = 300, loop = TRUE)
 )
 
@@ -52,7 +45,7 @@ y1_age_input  <- sliderInput(
   min = min(unique_ages),
   max = max(unique_ages),
   value = c(18, 45), 
-  step = 30,
+  step = 1,
   animate = animationOptions(interval = 300, loop = TRUE)
 )
 
@@ -135,14 +128,7 @@ page_three <- tabPanel(
   ),
   br(),
   titlePanel("Observing Patient Revisitation Rates by Surgery Complications"),
-  sidebarLayout(
-    sidebarPanel(
-      month_input
-    ),
-    mainPanel(
-      plotlyOutput(outputId = "line"),
-    )
-  ),
+  plotlyOutput(outputId = "line"),
   br(),
   #Why included chart and what patterns shown 
   p("summary of info ")

@@ -45,7 +45,7 @@ server <- function(input, output, session){
         filter(unique_ages <= input$m1_age_choice[2],unique_ages >= input$m1_age_choice[1])
     })
     #visualizing plot
-    age_plot_m1 <- ggplot(data = m1_plot_data()) +
+    age_plot_m1 <- ggplot(m1_plot_data()) +
       geom_point(mapping = aes(x = unique_ages, y = m1_values), color ="#645D9B") +
       labs(x = "Ages", y = "Proportion Return Visits at Month 1", title = "Age vs. Return Visit Month 1")
     #doing the plot
@@ -60,7 +60,7 @@ server <- function(input, output, session){
         filter(unique_ages <= input$m3_age_choice[2],unique_ages >= input$m3_age_choice[1])
     })
     #visualizing plot
-    age_plot_m3 <- ggplot(data = m3_plot_data()) +
+    age_plot_m3 <- ggplot(m3_plot_data()) +
       geom_point(mapping = aes(x = unique_ages, y = m1_values), color ="#645D9B") +
       labs(x = "Ages", y = "Proportion Return Visits at Month 3", title = "Age vs. Return Visit Month 3")
     #doing the plot
@@ -75,8 +75,8 @@ server <- function(input, output, session){
         filter(unique_ages <= input$y1_age_choice[2],unique_ages >= input$y1_age_choice[1])
     })
     #visualizing plot
-    age_plot_y1 <- ggplot(data = y1_plot_data()) +
-      geom_point(mapping = aes(x = unique_ages, y = y1_values), color ="#645D9B") +
+    age_plot_y1 <- ggplot(y1_plot_data()) +
+      geom_point(mapping = aes_string(x = unique_ages, y = y1_values), color ="#645D9B") +
       labs(x = "Ages", y = "Proportion Return Visits at Year 1", title = "Age vs. Return Visit Year 1")
     #doing the plot
     ggplotly(age_plot_y1) 
@@ -84,21 +84,13 @@ server <- function(input, output, session){
   
   #Surgery Complications vs. Revisitation Graph
   output$line <- renderPlotly({
-    #filter by age input
-    revisitation_data <- reactive({
-      revisit_filtered <- gen_revisit_data%>% 
-        filter(months <= input$months_choice[2],months >= input$months_choice[1])
-    })
-    comp_data <- reactive({
-      comp_filtered <- gen_comp_data%>% 
-        filter(months <= input$months_choice[2],months >= input$months_choice[1])
-    })
     #visualizing plot
+    colors = c("Revisitation Rate" = "#645D98", "Surgery Complication Rate" = "#82D8D5")
     p = ggplot() + 
-      geom_line(data = revisitation_data(), aes(x = months, y = revisitation_rate, color = "Revisitation Rate"), size = 1.5) +
-      geom_line(data = comp_data(), aes(x = months, y = comp_rate, color = "Surgery Complication Rate"), size = 1.5) +
-      labs(x = "Months", y = "Proportion", title = "Revisitation and Surgery Complication Rates over Time") +
-      scale_color_manual(values = colors)
+      geom_line(data = gen_revisit_data, mapping = aes(x = months, y = revisitation_rate, color = "Revisitation Rate"), size = 1.5) +
+      geom_line(data = gen_comp_data, mapping = aes(x = months, y = comp_rate, color = "Surgery Complication Rate"), size = 1.5) +
+      labs(x = "Months", y = "Proportion", title = "Revisitation and Surgery Complication Rates over Time", color = "Legend") +
+      scale_color_manual(values = colors) 
     #doing the plot
     ggplotly(p) 
   })
