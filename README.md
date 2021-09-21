@@ -17,5 +17,7 @@ The goal of this database is to identify trends that point to barriers of access
 To learn more about our data sources and the mission of SightLife and LVPEI Institutes, please refer to the links below:
 
 [SightLife](https://sightlife.org/)
+
 [LVPEI Bhubaneswar](https://www.lvpei.org/contact-us/contact-bhubaneswar)
+
 [LVPEI Vizag](https://www.lvpei.org/contact-us/contact-visakhapatnam)
