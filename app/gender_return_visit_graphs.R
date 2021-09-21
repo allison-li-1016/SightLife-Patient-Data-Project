@@ -4,7 +4,7 @@ library(lintr)
 library(styler)
 
 #Import data
-patient_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
+patient_data <- read.csv("FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
 
 #Filter by gender, M1, M3, Y1 visits 
 gender_data <- patient_data[,c("GEN_SEX", "M1_EXAMINED_AT_1MONTH","M3_EXAMINED_AT_1MONTH","Y1_EXAMINED_AT_1MONTH")]

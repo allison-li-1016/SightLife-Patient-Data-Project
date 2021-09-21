@@ -5,7 +5,7 @@ library(lintr)
 library(styler)
 
 #Import data
-patient_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
+patient_data <- read.csv("FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
 patient_data$M1_EXAMINED_AT_1MONTH<-ifelse(patient_data$M1_EXAMINED_AT_1MONTH=="Yes",1,0)
 patient_data$M3_EXAMINED_AT_1MONTH<-ifelse(patient_data$M3_EXAMINED_AT_1MONTH=="Yes",1,0)
 patient_data$Y1_EXAMINED_AT_1MONTH<-ifelse(patient_data$Y1_EXAMINED_AT_1MONTH=="Yes",1,0)

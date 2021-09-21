@@ -3,11 +3,11 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(plotly)
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\gender_return_visit_graphs.R")
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\age_return_visit_graphs.R")
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\surgery_comp_revisitation_graphs.R")
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\map_graphs.R")
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\diagnosis_graphs.R")
+source("gender_return_visit_graphs.R")
+source("age_return_visit_graphs.R")
+source("surgery_comp_revisitation_graphs.R")
+source("map_graphs.R")
+source("diagnosis_graphs.R")
 
 #Display outputs
 server <- function(input, output, session){

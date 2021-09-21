@@ -2,8 +2,8 @@
 library(shiny)
 library(ggplot2)
 source("app_server.R")
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\map_graphs.R")
-source("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\analysis\\age_return_visit_graphs.R")
+source("map_graphs.R")
+source("age_return_visit_graphs.R")
 
 #Graph display components
 

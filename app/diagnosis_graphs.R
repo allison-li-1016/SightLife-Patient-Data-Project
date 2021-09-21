@@ -4,7 +4,7 @@ library(lintr)
 library(styler)
 
 #Import data
-patient_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
+patient_data <- read.csv("FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
 
 #Before this, can filter data by age or gender and create same graph
 #do this with server

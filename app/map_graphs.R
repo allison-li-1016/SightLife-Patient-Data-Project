@@ -9,7 +9,7 @@ library(rgdal)
 library(mapproj)
 
 #import data 
-location_data <- read.csv("C:\\Users\\allis\\Desktop\\SightLife-Patient-Data-Project\\data\\FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
+location_data <- read.csv("FINAL LVPEI Bhubaneswar Tx Data Cleaned (2000s).csv")
 
 #build map chart based on countries - India vs. Bangladesh 
 countries <- location_data['GEN_COUNTRY']
