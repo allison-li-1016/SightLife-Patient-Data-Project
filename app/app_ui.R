@@ -83,7 +83,8 @@ page_two <- tabPanel(
   titlePanel("Observing Distribution of Patients by Location"),
   br(),
   mainPanel(
-    plotlyOutput(outputId = "map"),
+    #plotlyOutput(outputId = "map"),
+    tags$video(src = "www.mp4", type = "video/mp4", autoplay = T, controls = NA, width = "100%"),
   ),
   br(),
   #Why included chart and what patterns shown 
