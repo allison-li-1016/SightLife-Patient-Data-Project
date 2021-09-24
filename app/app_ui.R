@@ -142,7 +142,7 @@ page_three <- tabPanel(
 #page 4 - diagnosis analysis
 page_four <- tabPanel(
   "Diagnosis Analysis", 
-  titlePanel("Observing Diagnosis Proportions by Age"),
+  titlePanel("Observing Diagnosis Proportions"),
   br(),
   plotlyOutput(outputId = "pie"),
   br(),
